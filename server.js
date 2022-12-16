@@ -35,6 +35,7 @@ client.on('ready', () => {
   console.log(`Connected to the bot - ${client.user.tag}`);
 });
 
+// compiles all slash command files under client.commands
 client.commands = new Collection();
 
 const commandsPath = path.join(__dirname, 'commands');
@@ -80,6 +81,7 @@ client.on(Events.MessageCreate, async (msg) => {
 
 });
 
+// registers the slash commands
 client.on(Events.InteractionCreate, async (interaction) => {
 	if (!interaction.isChatInputCommand()) return;
 	const command = interaction.client.commands.get(interaction.commandName);
@@ -96,6 +98,5 @@ client.on(Events.InteractionCreate, async (interaction) => {
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 })
-
 
 client.login(process.env.BOT_TOKEN);

@@ -5,8 +5,10 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('test')
-    .setDescription('Replies w/ TEST'),
+    .setDescription('Replies w/ testing')
+    .addStringOption(option => option.setName('query').setDescription('Query to ChatGPT').setRequired(true)),
     async execute(interaction) {
-      await interaction.reply({ content: 'TEST', emphemeral: true });
+      console.log({ options: interaction.options.getString('query') });
+      await interaction.reply({ content: 'testing', emphemeral: true });
     },
 };
